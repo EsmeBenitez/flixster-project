@@ -1,0 +1,478 @@
+/* MovieModal Styles */
+
+/* Modal Backdrop - covers entire screen */
+.modal-backdrop {
+  /* Fixed positioning to cover viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Semi-transparent dark overlay */
+  background-color: rgba(0, 0, 0, 0.75);
+
+  /* Center the modal content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Place modal above all other content */
+  z-index: 1000;
+
+  /* Prevent scrolling the page behind the modal */
+  overflow-y: auto;
+
+  /* Add padding for mobile */
+  padding: 20px;
+
+  /* Smooth fade-in animation */
+  animation: fadeIn 0.3s ease;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content Container */
+.modal-content {
+  /* Background and shape */
+  background-color: #fffaec;
+  border-radius: 12px;
+
+  /* Size constraints */
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+
+  /* Shadow for depth */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* Position relative for close button positioning */
+  position: relative;
+
+  /* Allow scrolling if content is too tall */
+  overflow-y: auto;
+
+  /* Scale-up animation */
+  animation: scaleUp 0.3s ease;
+}
+
+/* Scale-up animation */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Close Button (X) */
+.modal-close {
+  /* Position in top-right corner */
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  /* Button styling */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+
+  /* Size */
+  width: 36px;
+  height: 36px;
+
+  /* Font styling */
+  font-size: 1.5rem;
+  line-height: 1;
+
+  /* Cursor and transitions */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  /* Center the X */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Place above backdrop image */
+  z-index: 10;
+}
+
+/* Close button hover effect */
+.modal-close:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+/* Close button focus state */
+.modal-close:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Backdrop Image Section */
+.modal-backdrop-image {
+  /* Position relative for any overlays */
+  position: relative;
+
+  /* Height constraint */
+  max-height: 400px;
+  overflow: hidden;
+
+  /* Rounded top corners to match modal */
+  border-radius: 12px 12px 0 0;
+}
+
+/* Backdrop Image */
+.backdrop-img {
+  /* Fill width */
+  width: 100%;
+
+  /* Maintain aspect ratio */
+  height: auto;
+
+  /* Smooth rendering */
+  display: block;
+}
+
+/* Modal Body - contains text content */
+.modal-body {
+  /* Padding around content */
+  padding: 24px 32px 32px 32px;
+}
+
+/* Movie Title */
+.modal-title {
+  /* Remove default margin */
+  margin: 0 0 16px 0;
+
+  /* Font styling */
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  /* Text color */
+  color: #222;
+}
+
+/* Metadata Row (rating, runtime, date) */
+.modal-metadata {
+  /* Arrange items horizontally */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  /* Spacing */
+  margin-bottom: 16px;
+
+  /* Font styling */
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Rating */
+.modal-rating {
+  /* Font weight */
+  font-weight: 600;
+  color: #333;
+}
+
+/* Divider bullet between metadata items */
+.modal-divider {
+  color: #ccc;
+  font-weight: 300;
+}
+
+/* Genres Section */
+.modal-genres {
+  /* Arrange genre tags horizontally, wrap to next line if needed */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  /* Spacing */
+  margin-bottom: 24px;
+}
+
+/* Individual Genre Tag */
+.genre-tag {
+  /* Styling */
+  background-color: #ffe3ec;
+  color: #ff88a3;
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  /* Font styling */
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  /* Prevent line breaks within tags */
+  white-space: nowrap;
+}
+
+/* Trailer Section */
+.modal-trailer {
+  /* Spacing */
+  margin-bottom: 24px;
+}
+
+.modal-trailer h3 {
+  /* Remove default margin */
+  margin: 0 0 12px 0;
+
+  /* Font styling */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Trailer container - maintains 16:9 aspect ratio */
+.modal-trailer__container {
+  /* Position relative for aspect ratio trick */
+  position: relative;
+
+  /* 16:9 aspect ratio (9 / 16 = 56.25%) */
+  padding-bottom: 56.25%;
+
+  /* Height of 0 allows padding to control height */
+  height: 0;
+
+  /* Prevent overflow */
+  overflow: hidden;
+
+  /* Rounded corners */
+  border-radius: 8px;
+
+  /* Shadow for depth */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  /* Background while loading */
+  background-color: #000;
+}
+
+/* Trailer video iframe */
+.modal-trailer__video {
+  /* Position absolutely to fill container */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* Fill the entire container */
+  width: 100%;
+  height: 100%;
+
+  /* Rounded corners to match container */
+  border-radius: 8px;
+}
+
+/* Overview Section */
+.modal-overview {
+  /* Spacing */
+  margin-top: 20px;
+}
+
+/* Overview Heading */
+.modal-overview h3 {
+  /* Remove default margin */
+  margin: 0 0 12px 0;
+
+  /* Font styling */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Overview Text */
+.modal-overview p {
+  /* Remove default margin */
+  margin: 0;
+
+  /* Font styling */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Loading State */
+.modal-loading {
+  /* Center the loading message */
+  padding: 60px 40px;
+  text-align: center;
+
+  /* Font styling */
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Error State */
+.modal-error {
+  /* Center the error message */
+  padding: 60px 40px;
+  text-align: center;
+
+  /* Font styling */
+  font-size: 1.1rem;
+  color: #c33;
+}
+
+/* AI Recommendation Section */
+.modal-ai-section {
+  /* Spacing from overview */
+  margin-top: 24px;
+
+  /* Distinct background to separate from movie details */
+  background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+
+  /* Padding */
+  padding: 20px;
+
+  /* Rounded corners */
+  border-radius: 8px;
+
+  /* Subtle border */
+  border: 1px solid #bbdefb;
+}
+
+/* AI Section Title */
+.modal-ai-title {
+  /* Remove default margin */
+  margin: 0 0 12px 0;
+
+  /* Font styling */
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ff88a3;
+
+  /* Add a subtle sparkle effect */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* AI Loading State */
+.modal-ai-loading {
+  /* Padding */
+  padding: 12px 0;
+
+  /* Center text */
+  text-align: center;
+
+  /* Font styling */
+  font-style: italic;
+  color: #666;
+}
+
+/* AI Content (the actual recommendation) */
+.modal-ai-content {
+  /* Padding */
+  padding: 12px 0;
+}
+
+.modal-ai-content p {
+  /* Remove default margin */
+  margin: 0;
+
+  /* Font styling */
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+
+  /* Add quote-like styling */
+  font-style: italic;
+}
+
+/* AI Fallback Message */
+.modal-ai-fallback {
+  /* Padding */
+  padding: 12px 0;
+
+  /* Font styling */
+  color: #999;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.modal-ai-fallback p {
+  margin: 0;
+}
+
+/* Responsive Design */
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  .modal-backdrop {
+    /* Reduce padding on smaller screens */
+    padding: 10px;
+  }
+
+  .modal-content {
+    /* Allow modal to be taller on mobile */
+    max-height: 95vh;
+  }
+
+  .modal-body {
+    /* Reduce padding */
+    padding: 20px 24px 24px 24px;
+  }
+
+  .modal-title {
+    /* Smaller title on mobile */
+    font-size: 1.5rem;
+  }
+
+  .modal-metadata {
+    /* Smaller text on mobile */
+    font-size: 0.9rem;
+  }
+
+  .modal-backdrop-image {
+    /* Reduce backdrop height on mobile */
+    max-height: 250px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .modal-backdrop {
+    /* Minimal padding on very small screens */
+    padding: 0;
+  }
+
+  .modal-content {
+    /* Full screen on mobile */
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .modal-backdrop-image {
+    /* No rounded corners on mobile */
+    border-radius: 0;
+  }
+
+  .modal-body {
+    /* Reduce padding further */
+    padding: 16px 20px 20px 20px;
+  }
+
+  .modal-title {
+    /* Even smaller title */
+    font-size: 1.25rem;
+  }
+
+  .modal-overview p {
+    /* Smaller text for better mobile reading */
+    font-size: 0.95rem;
+  }
+}

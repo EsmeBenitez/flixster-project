@@ -1,0 +1,217 @@
+/* MovieCard Styles */
+
+.movie-card {
+  /* Make the card itself a clickable element */
+  cursor: pointer;
+
+  /* Add smooth transition for hover effects */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Remove default outline and add custom focus style */
+  outline: none;
+
+  /* Rounded corners for a modern look */
+  border-radius: 8px;
+
+  /* Subtle shadow to give depth */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* Prevent content overflow */
+  overflow: hidden;
+
+  /* Make the card a flex container for better layout control */
+  display: flex;
+  flex-direction: column;
+
+  /* Background color */
+  background-color: #fffaec;
+  border: 6px solid #ffa3b8;
+  border-radius: 8px;
+}
+
+/* Hover effect: lift the card slightly and increase shadow */
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px #ff88a3;
+}
+
+/* Focus state for keyboard navigation (accessibility) */
+.movie-card:focus {
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+}
+
+/* Poster container - holds image and action buttons */
+.movie-card__poster-container {
+  /* Position relative so action buttons can be positioned absolutely */
+  position: relative;
+
+  /* Prevent overflow */
+  overflow: hidden;
+}
+
+/* Poster image styles */
+.movie-card__poster {
+  /* Make image fill the width */
+  width: 100%;
+
+  /* Maintain aspect ratio */
+  height: auto;
+
+  /* Prevent image from being dragged */
+  user-select: none;
+
+  /* Smooth rendering */
+  display: block;
+}
+
+/* Action buttons container (favorite & watched) */
+.movie-card__actions {
+  /* Position in top-right corner of poster */
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  /* Arrange buttons vertically */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  /* Initially hidden, show on card hover */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Show action buttons when card is hovered */
+.movie-card:hover .movie-card__actions {
+  opacity: 1;
+}
+
+/* Individual action button (heart or eye) */
+.movie-card__action-btn {
+  /* Button styling */
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+
+  /* Size */
+  width: 40px;
+  height: 40px;
+
+  /* Center the emoji */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Font size for emoji */
+  font-size: 1.3rem;
+
+  /* Cursor */
+  cursor: pointer;
+
+  /* Shadow for depth */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  /* Smooth transitions */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  /* Remove default outline */
+  outline: none;
+
+  /* Prevent text selection */
+  user-select: none;
+}
+
+/* Hover effect for action buttons */
+.movie-card__action-btn:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+/* Active state (when favorited or watched) */
+.movie-card__action-btn--active {
+  background-color: rgba(255, 230, 230, 1);
+}
+
+/* Focus state for keyboard navigation */
+.movie-card__action-btn:focus {
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+}
+
+/* Always show action buttons on mobile (no hover state) */
+@media (max-width: 768px) {
+  .movie-card__actions {
+    opacity: 1;
+  }
+
+  .movie-card__action-btn {
+    /* Slightly smaller on mobile */
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Content section (title and rating) */
+.movie-card__content {
+  /* Add padding around text */
+  padding: 12px;
+
+  /* Grow to fill remaining space */
+  flex-grow: 1;
+
+  /* Arrange items in a column */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Movie title */
+.movie-card__title {
+  /* Remove default margin */
+  margin: 0;
+
+  /* Font styling */
+  font-size: 1rem;
+  font-weight: 600;
+
+  /* Limit title to 2 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Set line height for better readability */
+  line-height: 1.4;
+
+  /* Text color */
+  color: #ff88a3;
+}
+
+/* Rating container */
+.movie-card__rating {
+  /* Arrange star and score horizontally */
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  /* Font styling */
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Star icon */
+.movie-card__star {
+  /* Slightly larger than the text */
+  font-size: 1rem;
+}
+
+/* Rating score */
+.movie-card__score {
+  /* Bold the number */
+  font-weight: 600;
+  color: #f17591;
+}

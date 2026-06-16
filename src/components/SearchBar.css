@@ -1,0 +1,167 @@
+/* SearchBar Styles */
+
+.search-bar {
+  /* Center the search bar */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Form layout */
+.search-bar__form {
+  /* Use flexbox to arrange input and buttons horizontally */
+  display: flex;
+  gap: 12px; /* Space between elements */
+
+  /* Make sure items stretch to same height */
+  align-items: stretch;
+}
+
+/* Input field */
+.search-bar__input {
+  /* Take up most of the available space */
+  flex: 1;
+
+  /* Padding inside the input */
+  padding: 12px 16px;
+
+  /* Border and corners */
+  border: 2px solid #ffa3b8;
+  border-radius: 8px;
+
+  /* Font styling */
+  font-size: 1rem;
+  font-family: inherit; /* Use the same font as the rest of the app */
+
+  /* Transition for focus effect */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  /* Remove default outline (we'll add our own focus style) */
+  outline: none;
+}
+
+/* Input focus state */
+.search-bar__input:focus {
+  /* Highlight border when input is focused */
+  border-color: #ff88a3;
+
+  /* Add a subtle glow effect */
+  box-shadow: 0 0 0 3px rgba(255, 136, 163, 0.1);
+}
+
+/* Placeholder text styling */
+.search-bar__input::placeholder {
+  color: #ffd7e1;
+  font-style: italic;
+}
+
+/* Button base styles */
+.search-bar__button {
+  /* Padding inside buttons */
+  padding: 12px 24px;
+
+  /* Remove default border */
+  border: none;
+
+  /* Rounded corners */
+  border-radius: 8px;
+
+  /* Font styling */
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+
+  /* Cursor changes to pointer on hover */
+  cursor: pointer;
+
+  /* Smooth transition for hover effects */
+  transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+
+  /* Remove default outline */
+  outline: none;
+
+  /* Prevent text selection when clicking button repeatedly */
+  user-select: none;
+}
+
+/* Search button specific styles */
+.search-bar__button--search {
+  background-color: #ff88a3;
+  color:#fffaec;
+}
+
+/* Search button hover effect */
+.search-bar__button--search:hover:not(:disabled) {
+  background-color: #ff6b8a;
+  transform: translateY(-2px);
+}
+
+/* Clear button specific styles */
+.search-bar__button--clear {
+  background-color: #ff88a3;
+  color: #fffaec;
+}
+
+/* Clear button hover effect */
+.search-bar__button--clear:hover:not(:disabled) {
+  background-color: #ff6b8a;
+  transform: translateY(-2px);
+}
+
+/* Disabled button state */
+.search-bar__button:disabled {
+  /* Gray out disabled buttons */
+  background-color: #ccc;
+  color: #888;
+
+  /* Change cursor to indicate button is not clickable */
+  cursor: not-allowed;
+
+  /* Reduce opacity */
+  opacity: 0.6;
+
+  /* No hover transform when disabled */
+  transform: none;
+}
+
+/* Focus state for keyboard navigation */
+.search-bar__button:focus {
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+}
+
+/* Responsive design for tablets and smaller */
+@media (max-width: 768px) {
+  .search-bar__form {
+    /* Stack buttons below input on smaller screens */
+    flex-wrap: wrap;
+  }
+
+  .search-bar__input {
+    /* Input takes full width */
+    flex: 1 1 100%;
+  }
+
+  .search-bar__button {
+    /* Buttons share space equally */
+    flex: 1;
+  }
+}
+
+/* Responsive design for mobile */
+@media (max-width: 480px) {
+  .search-bar {
+    padding: 16px;
+  }
+
+  .search-bar__form {
+    /* Stack everything vertically on mobile */
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-bar__button {
+    /* Full width buttons on mobile */
+    width: 100%;
+  }
+}

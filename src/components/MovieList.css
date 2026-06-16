@@ -1,0 +1,144 @@
+/* MovieList Styles */
+
+.movie-list-container {
+  /* Add padding around the entire movie list section */
+  padding: 20px;
+
+  /* Center the container */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Grid layout for movie cards */
+.movie-list {
+  /*
+    Use CSS Grid for responsive layout
+    auto-fill: automatically create as many columns as will fit
+    minmax(200px, 1fr): each column is at least 200px wide, but can grow to fill available space
+    This makes the grid automatically responsive without media queries!
+  */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+  /* Gap between cards (both horizontal and vertical) */
+  gap: 24px;
+
+  /* Add margin below the grid */
+  margin-bottom: 32px;
+}
+
+/* Loading state */
+.movie-list__loading {
+  /* Center the loading text */
+  text-align: center;
+  padding: 40px 20px;
+
+  /* Style the text */
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Empty state (no results) */
+.movie-list__empty {
+  /* Center the empty message */
+  text-align: center;
+  padding: 40px 20px;
+
+  /* Style the text */
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Load More section */
+.movie-list__load-more {
+  /* Center the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+/* Load More button */
+.load-more-button {
+  /* Button styling */
+  background-color: #ff88a3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+
+  /* Font styling */
+  font-size: 1rem;
+  font-weight: 600;
+
+  /* Cursor changes to pointer on hover */
+  cursor: pointer;
+
+  /* Smooth transition for hover effect */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  /* Remove default button outline */
+  outline: none;
+}
+
+/* Hover effect for Load More button */
+.load-more-button:hover:not(:disabled) {
+  background-color: #ff6b8a;
+  transform: translateY(-2px);
+}
+
+/* Disabled state for Load More button */
+.load-more-button:disabled {
+  /* Gray out the button when disabled */
+  background-color: #ccc;
+  cursor: not-allowed;
+
+  /* Remove hover transform */
+  transform: none;
+}
+
+/* Focus state for keyboard navigation */
+.load-more-button:focus {
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+}
+
+/* End message when all movies are loaded */
+.movie-list__end-message {
+  /* Center and style the message */
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+
+/* Tablet size (between 600px and 1024px) */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .movie-list {
+    /* Ensure at least 2-3 columns on tablets */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Mobile size (below 600px) */
+@media (max-width: 599px) {
+  .movie-list-container {
+    /* Reduce padding on mobile */
+    padding: 16px;
+  }
+
+  .movie-list {
+    /* Ensure cards are big enough on mobile but allow 2 per row if space permits */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .load-more-button {
+    /* Make button full width on very small screens */
+    width: 100%;
+    max-width: 300px;
+  }
+}

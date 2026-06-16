@@ -1,0 +1,89 @@
+/* Footer Styles */
+
+.app-footer {
+  /* Dark background to match header */
+  background-color: #1a1a2e;
+
+  /* Text color */
+  color: #e0e0e0;
+
+  /* Padding around content */
+  padding: 24px 20px;
+
+  /* Add top border for subtle separation */
+  border-top: 1px solid #333;
+
+  /* Push footer to bottom of page */
+  margin-top: auto;
+}
+
+/* Footer content container */
+.footer-content {
+  /* Center content */
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+
+  /* Arrange text paragraphs with spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Footer text */
+.footer-text {
+  /* Remove default margin */
+  margin: 0;
+
+  /* Font styling */
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  /* Slightly transparent for subtle appearance */
+  opacity: 0.9;
+}
+
+/* Footer links */
+.footer-link {
+  /* Link color - pink that works on dark background */
+  color: #ff88a3;
+
+  /* Remove underline by default */
+  text-decoration: none;
+
+  /* Smooth transition for hover effect */
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+
+  /* Font weight for emphasis */
+  font-weight: 500;
+}
+
+/* Link hover effect */
+.footer-link:hover {
+  /* Brighter color on hover */
+  color: #ffb3c6;
+
+  /* Add underline on hover */
+  text-decoration: underline;
+}
+
+/* Link focus state for keyboard navigation */
+.footer-link:focus {
+  /* Visible focus outline */
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+
+  /* Rounded corners for outline */
+  border-radius: 2px;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .app-footer {
+    padding: 20px 16px;
+  }
+
+  .footer-text {
+    font-size: 0.85rem;
+  }
+}

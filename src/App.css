@@ -1,28 +1,95 @@
+/* Main App Container */
 .App {
-  text-align: center;
-}
+  /* Remove default margin and padding */
+  margin: 0;
+  padding: 0;
 
-.App-header {
-  background-color: #282c34;
+  /* Use flexbox to create a vertical layout */
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+
+  /* Make the app take at least full viewport height */
+  min-height: 100vh;
+
+  /* Background color for the entire app */
+  background-color: #ffd7e1;
+}
+
+/* Note: Header styles are now in Header.css */
+
+/* Error Message Styles */
+.error-message {
+  /* Red background for errors */
+  background-color: #fee;
+
+  /* Red border */
+  border: 1px solid #fcc;
+
+  /* Red text */
+  color: #c33;
+
+  /* Padding and margin */
+  padding: 16px;
+  margin: 20px;
+
+  /* Rounded corners */
+  border-radius: 8px;
+
+  /* Center text */
+  text-align: center;
+
+  /* Font styling */
+  font-weight: 500;
+}
+
+/* Mode Toggle (Now Playing button) */
+.mode-toggle {
+  /* Center the button */
+  display: flex;
+  justify-content: center;
+  padding: 16px 20px 0 20px;
+}
+
+/* Now Playing button */
+.now-playing-button {
+  /* Button styling */
+  background-color: #ff88a3;
   color: white;
-  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+
+  /* Font styling */
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  /* Cursor and transitions */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  /* Remove default outline */
+  outline: none;
 }
 
-@media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
-  }
-
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .search-bar form {
-    flex-direction: column;
-  }
+/* Hover effect */
+.now-playing-button:hover {
+  background-color: #ff6b8a;
+  transform: translateY(-2px);
 }
+
+/* Focus state for accessibility */
+.now-playing-button:focus {
+  outline: 2px solid #ff88a3;
+  outline-offset: 2px;
+}
+
+/* Main Content Area */
+main {
+  /* Grow to fill available space */
+  flex: 1;
+
+  /* Add some breathing room */
+  padding: 20px 0;
+}
+
+/* Note: Responsive styles for header are now in Header.css */

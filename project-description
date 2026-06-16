@@ -1,0 +1,570 @@
+Project #3: Flixster
+Overview
+In this project, you will be building a website showing the latest movies currently playing in theaters. You will be using the The Movie Database API to get the list of latest movies and use HTML, CSS, and JavaScript to create your website.
+
+💡 Read through all the milestones before you start. Later milestones often provide context that affects decisions you make in earlier ones. Skim end-to-end first, then come back to Milestone 0. It's expected — and encouraged — to revisit earlier milestones as your plan evolves.
+🎯 Goals
+By the end of this assignment, you will be able to:
+
+Built a dynamic, interactive web application using React, guided by a written project specification you authored before implementation.
+Defined component interfaces, API contracts, and state architecture before writing any code, then validated that your implementation matches what you planned.
+Integrated multiple external APIs to fetch and display real-world data, with proper error handling for failed or empty responses.
+Added an AI-powered feature using the OpenRouter API — specced in planning.md before implementation, implemented using the same prompt spec and fetch pattern from Unit 2.
+Designed an accessible, responsive user interface that works across device sizes.
+Flixster README template
+✅ Features
+Required Features
+
+Display Movies (Home Page) — Fetch and display a list of movies currently playing in theaters using the TMDb Now Playing endpoint.
+
+Movies are displayed in a responsive grid.
+Each movie is shown in a MovieCard component that includes the title, poster image, and vote average.
+
+Search Functionality — Allow users to search for movies by title.
+
+Search results update the displayed movie list using the TMDb search endpoint.
+Users can return to the Now Playing list after searching (e.g., by clearing the search or clicking "Now Playing").
+
+Design Features
+
+Users can load more movies by clicking a "Load More" button, which appends additional results to the existing list.
+A modal displays detailed information about a movie when a MovieCard is clicked, including backdrop image, title, runtime, release date, genres, and overview.
+Users can sort the current movie list by title, release date, or vote average using a dropdown.
+A header and footer are present on the page.
+Errors are handled gracefully — if an API call fails, the user sees a helpful message rather than a broken UI.
+Loading states are displayed while data is being fetched.
+
+Planning Documentation — Maintain a planning.md spec, committed before you write implementation code (you build this in Milestone 0 and update it as you go). By submission it should include:
+
+A Component Architecture section listing at least 5 components, each with its responsibility, what it renders, and its props.
+An API Contracts section documenting at least 2 TMDb endpoints, with URL, parameters, and the response fields you use.
+A State Architecture section listing each state variable's name, type, initial value, owner component, and update trigger.
+A Data Flow section describing how data moves from the TMDb response through the component hierarchy to the MovieCard.
+
+AI-Powered Movie Insight — When a user opens a movie's detail modal, an AI-generated "Watch Recommendation" is displayed alongside the movie details.
+
+Before implementation, an AI feature spec is documented in planning.md — including the prompt spec (role, task, inputs, output format, constraints, failure behavior), the OpenRouter endpoint and model, the state variable for the AI response, and how the feature is displayed in the modal.
+The feature calls the OpenRouter API using the movie's title, genres, and overview as context.
+A loading state is displayed while the AI response is being generated.
+If the AI call fails, a graceful fallback message is shown rather than a broken UI.
+A decisions log is included in planning.md documenting what AI generated, what was changed, and what was learned.
+Stretch Features
+Deployment - Deploy your Flixster app
+Website is deployed via Render.
+Embedded Trailers — When a movie modal is open, fetch and display the official trailer using the TMDb videos endpoint.
+Favorite Button — Users can mark movies as favorites; favorited movies are visually distinguished.
+Watched Checkbox — Users can mark movies as watched; watched movies are visually distinguished.
+Sidebar — A sidebar panel allows users to filter the movie list by favorited or watched status.
+A simple version of the app with all the required features implemented:
+
+
+🧑🏽‍💻 Project Instructions
+Milestone 0: Project Setup
+Goal
+The goal of this milestone is to fork and clone the starter repository, open the project in Cursor, explore the starter code and the demo video for the finished app, secure your TMDb API key, and write your planning.md before you write a single line of implementation code.
+
+From Component Specs to Project Specs
+In the Weather Report labs, you practiced specification as individual skills: component specs in Part 1, data transformation specs in Part 2, API integration specs and state specs in Part 3. This milestone introduces something new: combining all of those into a single project-level spec.
+
+Instead of describing one component or one function, you're describing the entire system — every component, every API call, every piece of state, and how data flows between them. Writing this before implementation forces you to make architectural decisions deliberately rather than discovering them mid-code. It also gives you something concrete to reference when you're stuck, and something to hand to Claude when you need help — a spec gives AI far better context than "how do I build this?" does.
+
+Your spec lives in a planning.md file committed to your repo. It's a living document — it will evolve as you build. But it has to exist before you write your first component.
+
+💻 Your Turn
+Project Setup
+
+Fork the provided starter repo and clone it to your machine: git clone git@github.com:USERNAME/flixster-starter.git
+Navigate into the project directory and open it in Cursor: cursor .
+Install dependencies and start the dev server: npm install && npm run dev
+Open the project in your browser and confirm it renders without errors.
+Open the Claude Chat panel, reference your project files with @, and ask Claude for an overview of what each file does and what the starter code already provides.
+Watch the Demo Video
+
+Scroll up to the Overview section and watch the embedded Loom demo of the finished Flixster app. This is your visual reference for the project — there's no separate wireframe.
+As you watch, note the structure of a MovieCard, how the grid adapts across screen widths, what information appears in the modal, and how the user moves between the Now Playing list and search results. You'll return to this demo throughout the project as your reference for layout and interaction decisions.
+Obtain and Secure Your TMDb API Key
+
+Create a free account at themoviedb.org.
+Navigate to Settings → API and request a developer API key.
+Create a .env file in the project root and add your key: VITE_API_KEY=your_api_key_here
+Confirm .env is listed in .gitignore. If it isn't, add it — this prevents your key from ever being committed to GitHub.
+Access the key in your code using import.meta.env.VITE_API_KEY.
+info
+🔐 Why .gitignore matters here
+The .gitignore file is what keeps sensitive files like .env out of those commits, even when you're collaborating with others. If you accidentally commit your API key and push it to GitHub, anyone who can see your repository can use your key — and rack up charges if you're on a paid tier. This is why .env in .gitignore is non-negotiable for any project that uses API keys.
+
+If your API key isn't being read in code, the most common causes are: the file is in the wrong location (must be in the project root, not inside src/), the variable name is missing the VITE_ prefix, or the dev server wasn't restarted after creating the file.
+
+:::
+Write Your planning.md
+
+Create a planning.md file in the project root and write your project spec. It should cover five sections:
+
+
+Component Architecture: List every component your app will need. For each component, define: responsibility (one sentence), what it renders, what props it receives, and whether it manages any state. Also document the parent-child hierarchy — which component renders which. Your list should include at minimum: App, MovieList, MovieCard, SearchBar, MovieModal, Header, Footer, and a sort control.
+
+
+API Contracts: Identify every TMDb endpoint your app will use. For each one, define: the endpoint URL, required parameters, the response fields your components will actually use, and the error cases to handle. You'll need at minimum: the Now Playing endpoint, the Search endpoint, and the Movie Details endpoint (the modal needs runtime and genres, which aren't in the Now Playing response).
+
+
+State Architecture: List every piece of state your app needs to manage. For each one, define: the variable name and data type, its initial value, which component owns it, and what triggers an update. Think about: the current movie list, active search query, current page number, selected movie for the modal, sort option, loading state, and error state.
+
+
+Data Flow: Describe in a short paragraph or simple diagram how data moves from the TMDb API to the rendered MovieCard. Does the raw API response need any transformation before it reaches your components? When a user clicks a MovieCard, how does the movie's ID reach the fetch call for details?
+
+
+AI Feature Spec: Before you reach Milestone 8, sketch what your AI feature will do. You'll refine this when you implement it, but starting with a rough plan here forces you to make architectural decisions early:
+
+Which component will display the AI insight? (Hint: MovieModal)
+What movie data will you send to the AI as context? (title, genres, overview)
+What do you want the AI to return? (e.g., a 2–3 sentence "watch recommendation")
+Where does the AI response live in state?
+
+Commit planning.md to your repo before moving on to Milestone 1.
+
+💡 Not sure where to start? Re-read the Required Features and treat each one as a prompt. If a feature says "display movies in a grid," your spec should answer: what component renders the grid, what component renders each item, and what data does each item need?
+
+Review Your Spec with Claude
+
+Open the Claude Chat panel, reference your planning.md with @, and ask Claude to review your spec for gaps. Think about what you actually want to know: are there missing components? State you haven't accounted for? API calls you'll need that aren't documented? Write the question in your own words based on what you're uncertain about.
+Read Claude's response critically — it may suggest things you don't need, or surface a real gap. You decide what to add. The goal is to stress-test your plan before you're mid-implementation.
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 1, make sure:
+
+The project is open in Cursor and the dev server runs without errors.
+Your TMDb API key is stored in .env and .env is in .gitignore.
+Your planning.md exists in the project root and covers all five sections: component architecture, API contracts, state architecture, data flow, and AI feature sketch.
+You've completed a tour of the starter code with Claude's help.
+planning.md is committed to your repository.
+Milestone 1: Building the Basics
+Goal
+The goal of this milestone is to build the MovieCard and MovieList components, fetch the Now Playing movies from TMDb, and display them in a grid.
+
+From Spec to Component
+Open your planning.md. Your component architecture defines what MovieCard renders and what props it receives. Your API contract defines the Now Playing endpoint and which response fields you'll use. This milestone is about implementing what you already planned — not discovering the structure mid-build.
+
+For each component, the process is: create the .jsx file → refer to your component spec → implement the props interface you defined → render the content your spec describes → review the implementation against the spec before moving on.
+
+💻 Your Turn
+Build MovieCard
+
+Create src/components/MovieCard.jsx and a corresponding MovieCard.css file.
+Refer to the MovieCard spec in your planning.md — implement the props interface you defined and render what your spec says this component is responsible for.
+Each card should display the movie's title, poster image, and vote average.
+info 💡 TMDb poster images
+Poster images are accessed via a base URL combined with the poster_path field from the API response:
+
+`https://image.tmdb.org/t/p/w500${movie.poster_path}`
+Some movies may have a null poster path. Consider adding a fallback image for this case — ask Claude in Ask mode if you want a suggestion for how to handle it gracefully. :::
+
+💡 Using Claude to scaffold a component
+Once you've defined MovieCard's props and what it renders in your spec, you can use Cursor's Edit mode (Cmd+K) to generate the JSX from your spec. Describe the props and rendering behavior, then review what Claude produces against your spec before accepting it. This is the Reviewer-in-Chief pattern: you write the spec, Claude takes the first implementation pass, and you validate the output.
+
+Build MovieList
+
+Create src/components/MovieList.jsx.
+MovieList has two responsibilities: fetching movie data and rendering a MovieCard for each result. Refer to your component spec and API contract in planning.md for both.
+Use useState and useEffect to fetch the Now Playing movies when the component mounts and store the results in state.
+Use map() to render a MovieCard for each movie in the results array.
+Spec-Check
+
+Once movies are displaying in the browser, open the Claude Chat panel, share your MovieCard.jsx and MovieList.jsx, and reference your planning.md with @. Ask Claude to audit your implementation against your spec — think about what alignment questions matter most to you: Do the props match what you defined? Are there fields being fetched that nothing renders? Write the question yourself based on what you actually want to verify.
+Note any differences and decide whether to update the code or update the spec. If you made implementation decisions that diverged from your plan, update planning.md now — specs are living documents.
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 2, make sure:
+
+MovieCard renders a movie's title, poster image, and vote average.
+MovieList fetches Now Playing movies from TMDb and renders a MovieCard for each result.
+Movies are displayed in a grid layout.
+Your planning.md has been updated to reflect any implementation decisions that differed from your original plan.
+Changes are committed to your repository.
+Milestone 2: Adding Interactivity
+Goal
+The goal of this milestone is to add "Load More" pagination, a search feature, and the ability to switch between the Now Playing list and search results.
+
+Spec Before You Add State
+Before writing any code, check your planning.md. Your state architecture should already define a state variable for the current page number and for the search query. If it doesn't, add them now — then implement. Adding state that isn't in your spec is a signal to update the spec first.
+
+Your API contract should also define both the Now Playing endpoint (used here for pagination) and the Search endpoint. If you haven't specified the Search endpoint's parameters and response fields yet, do that in planning.md before implementing search.
+
+💻 Your Turn
+Implement Load More (Pagination)
+
+The Now Playing endpoint returns 20 movies per page. Add a "Load More" button that fetches the next page and appends the results to the existing list (not replaces it).
+Use the page parameter in your API call and a state variable to track the current page.
+Use the total_pages field in the API response to determine when to hide or disable the "Load More" button.
+// appending new results to an existing array in state
+setMovies(prevMovies => [...prevMovies, ...newMovies]);
+Implement Search
+
+Add a SearchBar component with a controlled input — the input's value should be tied to a state variable and update on every keystroke.
+When the user submits a search (button click or Enter key), reset the movie list and page number to their initial values, then fetch from the TMDb Search endpoint using the current query.
+Use your API contract in planning.md to confirm the Search endpoint URL, required parameters (query, api_key, page), and response shape.
+info 💡 Controlled components
+A controlled input means React owns the input's value through state:
+
+<input
+  type="text"
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  placeholder="Search movies..."
+/>
+This is the same pattern covered in Weather Report Part 3's SearchForm component. :::
+
+Implement the Now Playing / Search Toggle
+
+When the user clears the search or clicks "Now Playing," clear the search query from state, reset the page number to 1, and re-fetch the Now Playing movies.
+Update planning.md to reflect the state variables you added for search query, current page, and active mode (if applicable).
+💡 Debugging the toggle
+Managing the switch between Now Playing and search results involves several interacting state changes happening together. If the toggle isn't working as expected, describe the problem to Claude in the Chat panel — explain what you expect to happen, what's actually happening, and share the relevant code. Being specific about the gap between expected and actual behavior is the most effective way to get useful debugging help.
+
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 3, make sure:
+
+"Load More" appends additional movies to the list without replacing existing results.
+The "Load More" button is hidden or disabled when all pages have been loaded.
+Search returns results matching the query using the TMDb search endpoint.
+Users can return to the Now Playing list after searching.
+Page number resets correctly when switching between modes.
+planning.md reflects the current state of your app, including any state variables added this milestone.
+Changes are committed to your repository.
+Milestone 3: Building for Everyone on Any Device
+Goal
+The goal of this milestone is to make your movie grid responsive so it works well on any screen size, from a phone to a wide desktop monitor.
+
+Plan Your Breakpoints Before You Style
+Before writing any media queries, decide what the grid should look like at different widths. Reference the demo video from Milestone 0 to see how the grid behaves in the finished app. How many cards per row at desktop? At tablet width? On mobile? Writing this down before you open your CSS file — even just a few lines in a comment — gives you a target to implement against rather than a vague visual feeling to chase.
+
+💻 Your Turn
+Define Your Breakpoints
+
+Decide on at least two breakpoints (e.g., 600px and 1024px) and document what the grid should look like at each size. Add this as a comment in your CSS or a note in your planning.md.
+Implement Responsive Styles
+
+Use CSS Flexbox or Grid to create a movie card layout that reflows naturally as the viewport narrows.
+Use @media queries to adjust column counts or card sizes at your defined breakpoints.
+/* example: auto-filling grid that adapts to viewport width */
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+Confirm that MovieCards don't overflow, collapse, or become illegible at narrow viewport widths.
+info 💡 Debugging responsive layouts
+If your grid isn't behaving the way you expect at a particular breakpoint, share the relevant CSS with Claude in the Chat panel and describe what you're seeing vs. what you expect. You can also use Chrome DevTools' device simulation mode (toggle the device toolbar with Cmd+Shift+M) to test different screen widths without resizing your browser window. :::
+
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 4, make sure:
+
+The movie grid adapts gracefully at two or more different screen widths.
+MovieCards don't overflow or collapse at narrow viewports.
+Changes are committed to your repository.
+Milestone 4: Diving Deeper into More Details
+Goal
+The goal of this milestone is to build a MovieModal component that opens when a user clicks a MovieCard and displays detailed movie information — including data that requires a separate API call to the TMDb Movie Details endpoint.
+
+Update Your Spec Before You Build
+The modal introduces architecture that your original planning.md may not fully account for. The Now Playing and Search endpoints don't return runtime or genres — those fields require a separate fetch using the movie's id. Before writing any component code, update planning.md with two additions.
+
+This isn't just bookkeeping — thinking through the modal's data path before building it will save you from discovering mid-implementation that you don't know where the movie_id lives or which component should trigger the fetch.
+
+💻 Your Turn
+Update Your planning.md First
+
+
+Add a component spec for MovieModal to your component architecture:
+
+What props does it receive? (At minimum: a movie ID and an onClose callback)
+What does it render? (backdrop image, title, runtime, release date, genres, overview)
+How does the user open and close it?
+
+Add an API contract for the TMDb Movie Details endpoint:
+
+Endpoint URL (includes the movie ID as a path parameter)
+Required parameters
+Response fields you'll use: title, runtime, release_date, genres, overview, backdrop_path
+Error cases: movie not found (404), bad API key (401), network failure
+
+Update your data flow section to capture the new data path: which component handles the MovieCard click event? Where does the selected movie ID live in state? Which component owns the "modal is open" state, and how does that state reach MovieModal?
+
+Build MovieModal
+
+Create src/components/MovieModal.jsx.
+When a MovieCard is clicked, store the selected movie's id in state (in App or whichever component owns the modal state, per your spec).
+Use a useEffect to fetch the detailed movie data when a movie ID is set in state.
+Pass the fetched details as props to MovieModal and render them: backdrop image, title, runtime, release date, genres (as a comma-separated list or tags), and overview.
+Provide a way to close the modal (an X button, clicking outside the modal, or pressing Escape) that clears the selected movie ID from state.
+Style the modal as a centered overlay with a semi-transparent backdrop.
+Handle the case where the details API call fails — the user should see a helpful message, not a broken modal.
+Claude Audit: Does Your Modal Match Your Spec?
+
+Once the modal opens, displays details, and closes correctly, open the Claude Chat panel and share your updated planning.md, MovieModal.jsx, and App.jsx using @ references. Ask Claude to audit your implementation against your spec — think about what you're most uncertain about: error handling? State cleanup on close? Prop alignment? Write the question yourself based on what you want to verify.
+Note any gaps Claude identifies — an unhandled error case, a missing prop, a loading state that's not shown — and decide whether to fix the code or update the spec.
+📍 Checkpoint
+Before moving on to Milestone 5, make sure:
+
+Clicking a MovieCard opens the modal.
+The modal displays: backdrop image, title, runtime, release date, genres, and overview.
+The modal closes correctly and state is cleaned up when it does.
+API errors for the details fetch are handled — the user sees something useful, not a broken modal.
+planning.md has been updated with the modal component spec, Movie Details API contract, and updated data flow.
+Changes are committed to your repository.
+Milestone 5: Sorting and Filtering
+Goal
+The goal of this milestone is to add a dropdown menu that lets users sort the current movie list by title, release date, or vote average.
+
+Sorting as a Data Transformation
+Sorting is a transformation applied to the movie array before rendering — the same category of operation as the parseForecastData helper you built in Weather Report Part 2. Before implementing, make two decisions: (1) will you sort the data in state (replacing the array when the sort option changes) or during rendering (sorting a derived copy in the render function)? (2) What is the sort direction for each option?
+
+Write these decisions in your planning.md — add a sort options entry to your state architecture section (you'll need a sortOption state variable) and note where the sort transformation happens.
+
+💻 Your Turn
+Add Sort Controls
+
+Add a sort dropdown (a <select> element or a dedicated sort component from your spec) with options for "Title (A-Z)", "Release Date (Newest)", and "Vote Average (Highest)".
+Update your planning.md with a sortOption state variable before implementing.
+Implement Sort Logic
+
+When the sort option changes, update sortOption in state and apply the corresponding sort to the movie list before rendering.
+Use JavaScript's Array.sort() with a comparator function:
+// sort by vote average, highest first
+const sorted = [...movies].sort((a, b) => b.vote_average - a.vote_average);
+
+// sort by title, A-Z
+const sorted = [...movies].sort((a, b) => a.title.localeCompare(b.title));
+info ⚠️ Note on paginated sorting
+Sorting client-side only reorders the movies currently loaded in state — not all movies on TMDb. If the user has loaded multiple pages, sorting will apply to those pages only. This is a known tradeoff. You don't need to address it, but it's worth understanding why it happens. :::
+
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 6, make sure:
+
+A sort dropdown is visible and functional on the page.
+Selecting "Title" sorts movies alphabetically (A-Z).
+Selecting "Release Date" sorts movies newest-first.
+Selecting "Vote Average" sorts movies highest-first.
+sortOption is documented in your planning.md state architecture.
+Changes are committed to your repository.
+Milestone 6: Adding a Header and Footer
+Goal
+The goal of this milestone is to add a Header component with your app's name and a Footer component with copyright information and relevant links.
+
+Simple Components, Consistent Pattern
+Header and Footer are presentational components — no state, no API calls, just props (if any) and HTML. If you included them in your component architecture in planning.md, implementing them is straightforward. If you didn't, now is a good time to add them.
+
+💻 Your Turn
+Build Header
+
+Create src/components/Header.jsx.
+Display your app name, optionally a logo or icon, and optionally a tagline.
+Build Footer
+
+Create src/components/Footer.jsx.
+Display a copyright notice and a link to The Movie Database (required if you use their data publicly). Optionally include a link to your GitHub.
+Integrate into App
+
+Render <Header /> at the top and <Footer /> at the bottom of your App component's JSX.
+📍 Checkpoint
+Before moving on to Milestone 7, make sure:
+
+Header renders at the top of the page with the app name.
+Footer renders at the bottom of the page with a copyright notice.
+Changes are committed to your repository.
+Milestone 7: Enhancing the User Experience
+Goal
+The goal of this milestone is to polish your app's visual design and verify it meets basic accessibility standards.
+
+Intent Before Implementation
+Before writing or generating any CSS, define your visual intent. A brief description — "movie cards should have a subtle shadow and lift slightly on hover," "the modal overlay should use a dark semi-transparent background to create depth" — gives Claude something precise to work against and gives you a standard to validate the output against.
+
+💻 Your Turn
+Style the App
+
+Before generating or writing CSS for any component, write 1–2 sentences describing your visual intent for that component — in a comment or in planning.md.
+Choose a consistent color palette (2–4 colors). Dark backgrounds with light text read well for movie apps, but the choice is yours.
+Set consistent typography — pick one or two fonts, set heading and body sizes. Google Fonts integrates easily with Vite via an @import in your CSS.
+Style MovieCards with consistent spacing, shadows, and hover states (a subtle scale or lift effect adds energy to the grid).
+Style the modal to look polished — consistent padding, clear visual hierarchy between the title, metadata, and overview.
+Use Claude's Edit mode to generate or refine CSS as needed. Include your intent description in the prompt and reference planning.md if the styles relate to an interaction you defined there.
+Verify Accessibility
+
+Confirm all <img> elements have descriptive alt attributes. For movie posters: alt={${movie.title} poster} works well.
+Check that your text and background color combinations meet WCAG 2.0 Level AA contrast requirements (4.5:1 ratio for normal text). Use the WebAIM Contrast Checker to verify.
+Confirm that interactive elements — MovieCards, buttons, the modal close button — are reachable and activatable via keyboard (Tab to focus, Enter/Space to activate).
+Review your HTML structure for semantic correctness: <header>, <main>, <footer>, <button> for clickable elements, <input> for the search field.
+info 💡 Checking contrast with Claude
+Once you've chosen your color scheme, describe the hex values to Claude in the Chat panel and ask whether the combinations are likely to meet WCAG 2.0 AA contrast requirements. Claude can suggest adjustments if contrast is too low — this is a practical use case for non-coding questions. :::
+
+:::
+
+📍 Checkpoint
+Before moving on to Milestone 8, make sure:
+
+The app has a consistent color scheme and typography.
+MovieCards have hover states with visual feedback.
+Text and background colors meet WCAG 2.0 AA contrast requirements.
+All images have descriptive alt attributes.
+Interactive elements are keyboard-accessible.
+Any AI-generated CSS was reviewed against your stated visual intent before being accepted.
+Changes are committed to your repository.
+Milestone 8: AI-Powered Movie Insight
+Goal
+The goal of this milestone is to add an AI-powered "Watch Recommendation" feature to your MovieModal using the OpenRouter API. When a user opens a movie's detail modal, an AI-generated recommendation will appear alongside the movie details — giving users a personalized take on whether the film is worth their evening.
+
+This milestone applies the same skills from Unit 2's AI integration work: write a prompt spec, call the OpenRouter API with the movie's context as input, handle failures gracefully, and log your decisions. The key difference is that you're doing it inside a React component, which means your AI response needs to live in state.
+
+Before You Write Any Code — Update planning.md
+You sketched the AI feature spec in Milestone 0. Now finalize it before writing any implementation code. This is the same pattern you've used throughout — spec committed, then implementation begins.
+
+💻 Your Turn
+Finalize Your AI Feature Spec in planning.md
+
+Before writing any code, update the AI Feature Spec section in your planning.md with the following:
+
+
+Prompt Spec — The most important part. Define:
+
+Role: What role should the AI play? (e.g., "an enthusiastic but honest film critic")
+Task: What exactly should the AI do? (e.g., "write a 2–3 sentence watch recommendation")
+Inputs: What movie context will you send? (title, genres as a comma-separated list, overview)
+Output format: What should the response look like? (plain text, 2–3 sentences, no spoilers, no "I" statements)
+Constraints: What should the AI avoid? (no plot spoilers, no comparisons to other films unless helpful, no generic phrases like "this film is a must-see")
+Failure behavior: What should users see if the AI call fails? (a friendly fallback message, e.g., "We couldn't generate a recommendation for this one — check out the overview above!")
+
+OpenRouter endpoint and model:
+
+Endpoint: https://openrouter.ai/api/v1/chat/completions
+Model: use a free-tier model such as meta-llama/llama-3.3-70b-instruct:free or google/gemma-3-27b-it:free
+You'll need an OpenRouter API key — sign up for free at openrouter.ai and add VITE_OPENROUTER_API_KEY=your_key_here to your .env file.
+
+State variable: What state holds the AI response inside MovieModal? (e.g., aiInsight, initialized to null; add a loadingInsight boolean for the loading state)
+
+
+Trigger: When does the AI call happen? (when the modal opens — i.e., when the movie id prop changes and details have been fetched)
+
+🔐 OpenRouter API Key Security
+You'll store your OpenRouter API key in .env, just like your TMDb key. This means it will be visible in your browser's network requests — anyone who opens DevTools can see it.
+
+This is the same limitation you encountered in Unit 2: browser-side API keys are inherently insecure. For a production app, you'd move this call to a backend server (you'll learn how to do that in Week 4 with Express). For this project, the .env + .gitignore pattern is sufficient — your key won't be committed to GitHub, and you're working with a free-tier key on a development project.
+
+If you're concerned about usage, you can set rate limits on your OpenRouter account at openrouter.ai/settings.
+
+🧠 Why OpenRouter here (and not the Claude API)?
+You'll notice this milestone uses OpenRouter with free Gemma or Llama models rather than the Claude API. Two reasons:
+
+Free models. OpenRouter offers free-tier access to Gemma and Llama, so you can build and test without managing billing or burning through credits during practice.
+Same integration pattern. The structure of an AI API call — endpoint, headers, request body with a system + user message, response parsing, error handling — is essentially identical across providers. The pattern you build here transfers directly to the Claude API (or any other LLM API) by swapping the endpoint, model name, and auth header.
+In production at Salesforce (and most companies you'll work at), Claude is one of the most common APIs in use. The skill we're building isn't "how to call OpenRouter" — it's "how to integrate any LLM into a product feature." Once you've done it once, switching providers is a 10-minute change.
+
+💻 Your Turn
+Implement the AI Insight Feature
+
+Using your prompt spec as your guide, implement getMovieInsight in MovieModal:
+
+
+Add aiInsight and loadingInsight state variables to MovieModal (or to App, if you've decided that's where the AI response belongs — check your spec).
+
+
+Implement a getMovieInsight async function that:
+
+Takes the movie's title, genres (as a comma-separated string), and overview as parameters
+Calls the OpenRouter API using the same fetch pattern from Unit 2
+Returns the AI-generated text on success, or a fallback message on failure
+Here's the OpenRouter fetch pattern to adapt from your prompt spec:
+
+async function getMovieInsight(title, genres, overview) {
+  const API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY;
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "meta-llama/llama-3.3-70b-instruct:free",
+        messages: [
+          {
+            role: "system",
+            content: /* your role and constraints from your prompt spec */
+          },
+          {
+            role: "user",
+            content: /* your task + the movie context (title, genres, overview) */
+          }
+        ]
+      })
+    });
+    if (!response.ok) throw new Error(`OpenRouter error: ${response.status}`);
+    const data = await response.json();
+    return data.choices[0].message.content;
+  } catch (error) {
+    console.error("AI insight failed:", error);
+    return "We couldn't generate a recommendation for this one — check out the overview above!";
+  }
+}
+
+Fill in the system and user message content from your prompt spec — don't use the template text as-is. Your spec defines the role, task, inputs, constraints, and output format.
+
+
+Trigger getMovieInsight when movie details are loaded — use a useEffect that depends on the movie id prop (or the fetched details state).
+
+
+While the AI call is in progress, set loadingInsight to true and display a loading indicator in the modal (e.g., "✨ Getting a recommendation...").
+
+
+Once the AI response arrives, set aiInsight to the result and loadingInsight to false. Display aiInsight in the modal with a label like "Watch Recommendation" or "AI Take".
+
+
+When the modal closes, reset both aiInsight and loadingInsight to their initial values so the next movie starts fresh.
+
+Validate against your prompt spec
+
+Open a few movies and read the AI responses. Do they match the format you specified? (2–3 sentences? No spoilers? No generic phrases?)
+If the output doesn't match your intent, refine your system or user message. Prompt engineering is iterative — your spec is your target, and you adjust your prompt until the output hits it.
+Add a Decisions Log
+
+In planning.md, under your AI Feature Spec section, add a decisions log:
+### AI Feature — Decisions Log
+- **What the API returned initially:** [describe the first few responses — did they match your spec?]
+- **What I changed in my prompt:** [any adjustments to the system message, user message, or constraints]
+- **What fallback behavior I implemented:** [what users see when the AI call fails]
+- **What I learned:** [one thing about prompt engineering, React state for async features, or OpenRouter]
+📍 Checkpoint
+Before submitting, make sure:
+
+Opening a MovieCard triggers an AI-generated insight that appears in the modal.
+A loading state is shown while the AI call is in progress.
+If the AI call fails, a fallback message is shown rather than a broken modal.
+The AI responses roughly match the format you defined in your prompt spec.
+Your planning.md AI Feature Spec is finalized, including the decisions log.
+Changes are committed to your repository.
+🎉 Stretch Features
+Movie Favorites
+
+Introduce a "heart" icon or a "Favorite" button on each MovieCard. When clicked, the movie should be visually marked as a favorite.
+
+Note: You don't need to save this information. The favorite status should be reset when the page is reloaded.
+Watched List
+
+Add a "Watched" checkbox or button to each MovieCard. Allow users to mark movies as "watched."
+
+Note: You don't need to save this information. The watched status should be reset when the page is reloaded.
+Sidebar Component
+Create a sidebar section that neatly displays a list of favorited movies and the user's watched list.
+Configuration and deployment
+
+Deploy your website to Render, a hosting service, so that anyone can access it.
+
+Note: Render may require some specific configuration files to understand your application. Here's a walkthrough on how to deploy your website using Render: Deploy a Website with Render.
+Embedded YouTube Trailers
+Allow movie video trailers to be played using embedded YouTube.

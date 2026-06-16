@@ -1,0 +1,76 @@
+/* Header Styles */
+
+.app-header {
+  /* Dark gradient background for visual interest */
+  background: linear-gradient(135deg, #fffaec 0%, #fffaec 100%);
+
+  /* Text color */
+  color: #ff88a3;
+
+  /* Padding around content */
+  padding: 32px 20px;
+
+  /* Center the content */
+  text-align: center;
+
+  /* Add shadow for depth */
+  box-shadow: 0 2px 8px #ff88a3;
+}
+
+/* App Title */
+.app-title {
+  /* Remove default margin */
+  margin: 0 0 8px 0;
+
+  /* Font styling */
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  /* Letter spacing for elegance */
+  letter-spacing: 1px;
+}
+
+/* App Subtitle */
+.app-subtitle {
+  /* Remove default margin */
+  margin: 0;
+
+  /* Font styling */
+  font-size: 1.1rem;
+  font-weight: 300;
+
+  /* Slightly transparent */
+  opacity: 0.9;
+}
+
+/* Responsive adjustments */
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .app-subtitle {
+    font-size: 1rem;
+  }
+
+  .app-header {
+    padding: 24px 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.75rem;
+  }
+
+  .app-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .app-header {
+    padding: 20px 12px;
+  }
+}
