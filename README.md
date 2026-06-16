@@ -10,9 +10,9 @@ Currently, two official plugins are available:
 
 ## Unit Assignment: Flixster
 
-Submitted by: **[Your Name]**
+Submitted by: **[Esmeralda Benitez]**
 
-Estimated time spent: **[#]** hours spent in total
+Estimated time spent: **[12]** hours spent in total
 
 Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 
@@ -128,28 +128,27 @@ Deployed Application (optional): [Flixster Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Paste the **shareable link** to your animated app walkthrough below (replace `ADD_LOOM_LINK_HERE`). GitHub markdown won't render an embedded Loom player, so a plain link is what graders will use. Make sure the link is public and playable before submitting. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website. (🚫 Remove this paragraph after adding your walkthrough link.)
 
-**Walkthrough video:** [Flixster Walkthrough](ADD_LOOM_LINK_HERE)
+**Walkthrough video:** [Flixster Walkthrough](https://www.loom.com/share/5c641b9bfb654e86b790d9c2f42817ba)
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+The topics discussed in my lab prepared me well for the assignment! I found the youtube video trailor implementation to feel a bit difficult because I felt a little more unprepared, but overral I felt prepared for most of the project!
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+If I had more time, I would have deployed my website! Aside from this, I wouldn't have done anything else much differently. Website deployment is an interesting stretch feature I am interested in learning how to implement.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+Something that did not go as planned is how long it took to load my modal when a movie was clicked on. I thought it was going to load much faster but it ended up taking some time.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+- Google fonts: https://fonts.google.com/
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Shout out to Melanie for helping me with the CSS styling of this project!
